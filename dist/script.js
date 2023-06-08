@@ -55,9 +55,24 @@ console.log(orders);
 const employee1 = new Department("Employees", "d3");
 employee1.addEmployee("Lisis");
 class AccountingDepartment extends Department {
+    get mostRecentReport() {
+        if (this.lastReport) {
+            return this.lastReport;
+        }
+        throw new Error("No recent reports");
+    }
+    set mostRecentReport(value) {
+        if (value) {
+            this.addReport(value);
+        }
+        else {
+            throw new Error("Please insert valid value!");
+        }
+    }
     constructor(id, reports) {
         super(id, "Accounting");
         this.reports = reports;
+        this.lastReport = reports[0];
     }
     addReport(text) {
         this.reports.push(text);
@@ -76,7 +91,7 @@ class AccountingDepartment extends Department {
 }
 const accounting = new AccountingDepartment("ac", []);
 accounting.addReport("nothing to state...");
+accounting.mostRecentReport = "New report";
+accounting.mostRecentReport = "Another New report";
 accounting.printReport();
-accounting.addEmployee("Lisis");
-accounting.addEmployee("Manu");
-accounting.printEmployeesInfo();
+console.log(accounting.mostRecentReport);

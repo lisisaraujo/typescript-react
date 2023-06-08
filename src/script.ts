@@ -79,9 +79,28 @@ employee1.addEmployee("Lisis");
 // inheritance: create a new class that inherits all the properties from another already existing class and new properties and methods that can be added to the new class
 
 class AccountingDepartment extends Department {
+  private lastReport: string;
+
+  public get mostRecentReport() {
+    if (this.lastReport) {
+      return this.lastReport;
+    }
+    throw new Error("No recent reports");
+  }
+
+  public set mostRecentReport(value: string) {
+    if (value) {
+      this.addReport(value);
+    } else {
+      throw new Error("Please insert valid value!");
+    }
+  }
+
   constructor(id: string, private reports: string[]) {
     super(id, "Accounting"); // super() calls the constructor of the base class, in this case Department. It has to be called before defining a new methods for this class.
+    this.lastReport = reports[0];
   }
+
   addReport(text: string) {
     this.reports.push(text);
   }
@@ -102,7 +121,14 @@ class AccountingDepartment extends Department {
 const accounting = new AccountingDepartment("ac", []);
 
 accounting.addReport("nothing to state...");
+accounting.mostRecentReport = "New report";
+accounting.mostRecentReport = "Another New report";
 accounting.printReport();
-accounting.addEmployee("Lisis");
-accounting.addEmployee("Manu");
-accounting.printEmployeesInfo();
+// accounting.addEmployee("Lisis");
+// accounting.addEmployee("Manu");
+// accounting.printEmployeesInfo();
+console.log(accounting.mostRecentReport);
+// getters and setters
+
+// get makes the reading of a private property possible from outside the class definition
+// set makes the setting of a new property possible from outside the class definition
