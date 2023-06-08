@@ -121,13 +121,13 @@ class AccountingDepartment extends Department {
 const accounting = new AccountingDepartment("ac", []);
 
 accounting.addReport("nothing to state...");
-accounting.mostRecentReport = "New report";
+accounting.mostRecentReport = "New report"; // setting
 accounting.mostRecentReport = "Another New report";
 accounting.printReport();
 // accounting.addEmployee("Lisis");
 // accounting.addEmployee("Manu");
 // accounting.printEmployeesInfo();
-console.log(accounting.mostRecentReport);
+console.log(accounting.mostRecentReport); //getting
 // getters and setters
 
 // get makes the reading of a private property possible from outside the class definition
