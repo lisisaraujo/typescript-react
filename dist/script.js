@@ -54,3 +54,29 @@ orders.describe();
 console.log(orders);
 const employee1 = new Department("Employees", "d3");
 employee1.addEmployee("Lisis");
+class AccountingDepartment extends Department {
+    constructor(id, reports) {
+        super(id, "Accounting");
+        this.reports = reports;
+    }
+    addReport(text) {
+        this.reports.push(text);
+    }
+    printReport() {
+        console.log(this.reports);
+    }
+    addEmployee(employee) {
+        if (employee === "Lisis") {
+            return;
+        }
+        else {
+            this.employees.push(employee);
+        }
+    }
+}
+const accounting = new AccountingDepartment("ac", []);
+accounting.addReport("nothing to state...");
+accounting.printReport();
+accounting.addEmployee("Lisis");
+accounting.addEmployee("Manu");
+accounting.printEmployeesInfo();

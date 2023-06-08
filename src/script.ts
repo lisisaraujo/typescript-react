@@ -36,8 +36,9 @@ console.log(userName, age);
 
 class Department {
   // public name: string;
-  private employees: string[] = []; // by adding "private", we make this property only accessible/changeble through the established method  declared withing this class declaration.
+  // private employees: string[] = []; // by adding "private", we make this property only accessible/changeble through the established method  declared withing this class declaration.
   // private id: string;
+  protected employees: string[] = []; // changing from private to protected allows us to have access to this property inside other classes that inherited this one, but still makes it not accessible from outside these classes.
 
   constructor(public name: string, private id: string) {
     // this.name = n;
@@ -74,3 +75,34 @@ console.log(orders);
 
 const employee1 = new Department("Employees", "d3");
 employee1.addEmployee("Lisis");
+
+// inheritance: create a new class that inherits all the properties from another already existing class and new properties and methods that can be added to the new class
+
+class AccountingDepartment extends Department {
+  constructor(id: string, private reports: string[]) {
+    super(id, "Accounting"); // super() calls the constructor of the base class, in this case Department. It has to be called before defining a new methods for this class.
+  }
+  addReport(text: string) {
+    this.reports.push(text);
+  }
+
+  printReport() {
+    console.log(this.reports);
+  }
+
+  addEmployee(employee: string) {
+    if (employee === "Lisis") {
+      return;
+    } else {
+      this.employees.push(employee);
+    }
+  }
+}
+
+const accounting = new AccountingDepartment("ac", []);
+
+accounting.addReport("nothing to state...");
+accounting.printReport();
+accounting.addEmployee("Lisis");
+accounting.addEmployee("Manu");
+accounting.printEmployeesInfo();
