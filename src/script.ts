@@ -39,9 +39,12 @@ class Department {
   // private employees: string[] = []; // by adding "private", we make this property only accessible/changeble through the established method  declared withing this class declaration.
   // private id: string;
   protected employees: string[] = []; // changing from private to protected allows us to have access to this property inside other classes that inherited this one, but still makes it not accessible from outside these classes.
-
+  static fiscalYear = 2023;
+  static createEmployee(name: string) {
+    return { name: name };
+  }
   constructor(public name: string, private id: string) {
-    // this.name = n;
+    console.log(Department.fiscalYear); // this is how you access static properties from INSIDE the class
   }
 
   describe(this: Department) {
@@ -118,6 +121,11 @@ class AccountingDepartment extends Department {
   }
 }
 
+/////////////////////////////// getters and setters
+
+// get makes the reading of a private property possible from outside the class definition
+// set makes the setting of a new property possible from outside the class definition
+
 const accounting = new AccountingDepartment("ac", []);
 
 accounting.addReport("nothing to state...");
@@ -127,8 +135,10 @@ accounting.printReport();
 // accounting.addEmployee("Lisis");
 // accounting.addEmployee("Manu");
 // accounting.printEmployeesInfo();
-console.log(accounting.mostRecentReport); //getting
-// getters and setters
+// console.log(accounting.mostRecentReport); //getting - not working(?)
 
-// get makes the reading of a private property possible from outside the class definition
-// set makes the setting of a new property possible from outside the class definition
+///////////////////////// static methods and properties:
+// with static methods we can add methods to our classes that don't need the initialization of the class with the New keyword before. We can access it directly by dot noation on the object, like so:
+
+const newEmployee = Department.createEmployee("Jasmeen");
+console.log(newEmployee, Department.fiscalYear);

@@ -27,10 +27,14 @@ console.log(restOfHobbies);
 const { firstName: userName, age } = person;
 console.log(userName, age);
 class Department {
+    static createEmployee(name) {
+        return { name: name };
+    }
     constructor(name, id) {
         this.name = name;
         this.id = id;
         this.employees = [];
+        console.log(Department.fiscalYear);
     }
     describe() {
         console.log("Department: " + this.name);
@@ -43,6 +47,7 @@ class Department {
         console.log(this.employees);
     }
 }
+Department.fiscalYear = 2023;
 const delivery = new Department("Delivery", "d1");
 console.log(delivery);
 delivery.addEmployee("Lisis");
@@ -94,4 +99,5 @@ accounting.addReport("nothing to state...");
 accounting.mostRecentReport = "New report";
 accounting.mostRecentReport = "Another New report";
 accounting.printReport();
-console.log(accounting.mostRecentReport);
+const newEmployee = Department.createEmployee("Jasmeen");
+console.log(newEmployee, Department.fiscalYear);
