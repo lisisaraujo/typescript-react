@@ -1,31 +1,4 @@
 "use strict";
-const button = document.querySelector("button");
-const num1 = document.getElementById("num1");
-const num2 = document.getElementById("num2");
-const num3 = document.getElementById("num3");
-function add(num1, num2, num3) {
-    return num1 + num2 + num3;
-}
-button.addEventListener("click", function () {
-    console.log(add(+num1.value, +num2.value, +num3.value));
-});
-const hobbies = [
-    "hiking",
-    "swimming",
-    "dancing",
-    "reading",
-    "running",
-];
-const person = {
-    firstName: "Lisis",
-    age: 29,
-    petName: "Baco",
-};
-const [hobbie1, hobbie2, ...restOfHobbies] = hobbies;
-console.log(hobbie1, hobbie2);
-console.log(restOfHobbies);
-const { firstName: userName, age } = person;
-console.log(userName, age);
 class Department {
     static createEmployee(name) {
         return { name: name };
@@ -36,9 +9,6 @@ class Department {
         this.employees = [];
         console.log(Department.fiscalYear);
     }
-    describe() {
-        console.log("Department: " + this.name);
-    }
     addEmployee(employee) {
         this.employees.push(employee);
     }
@@ -48,18 +18,10 @@ class Department {
     }
 }
 Department.fiscalYear = 2023;
-const delivery = new Department("Delivery", "d1");
-console.log(delivery);
-delivery.addEmployee("Lisis");
-delivery.addEmployee("Cecile");
-delivery.describe();
-delivery.printEmployeesInfo();
-const orders = new Department("Orders", "d2");
-orders.describe();
-console.log(orders);
-const employee1 = new Department("Employees", "d3");
-employee1.addEmployee("Lisis");
 class AccountingDepartment extends Department {
+    describe() {
+        console.log("IT department - accounting " + this.id);
+    }
     get mostRecentReport() {
         if (this.lastReport) {
             return this.lastReport;
@@ -75,7 +37,7 @@ class AccountingDepartment extends Department {
         }
     }
     constructor(id, reports) {
-        super(id, "Accounting");
+        super("id", "02");
         this.reports = reports;
         this.lastReport = reports[0];
     }
@@ -99,5 +61,6 @@ accounting.addReport("nothing to state...");
 accounting.mostRecentReport = "New report";
 accounting.mostRecentReport = "Another New report";
 accounting.printReport();
+accounting.describe();
 const newEmployee = Department.createEmployee("Jasmeen");
 console.log(newEmployee, Department.fiscalYear);

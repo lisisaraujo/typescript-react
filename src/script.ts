@@ -1,40 +1,40 @@
-const button = document.querySelector("button")!;
-const num1 = document.getElementById("num1")! as HTMLInputElement;
-const num2 = document.getElementById("num2")! as HTMLInputElement;
-const num3 = document.getElementById("num3")! as HTMLInputElement;
+// const button = document.querySelector("button")!;
+// const num1 = document.getElementById("num1")! as HTMLInputElement;
+// const num2 = document.getElementById("num2")! as HTMLInputElement;
+// const num3 = document.getElementById("num3")! as HTMLInputElement;
 
-function add(num1: number, num2: number, num3: number) {
-  return num1 + num2 + num3;
-}
+// function add(num1: number, num2: number, num3: number) {
+//   return num1 + num2 + num3;
+// }
 
-button.addEventListener("click", function () {
-  console.log(add(+num1.value, +num2.value, +num3.value));
-});
+// button.addEventListener("click", function () {
+//   console.log(add(+num1.value, +num2.value, +num3.value));
+// });
 
-const hobbies: string[] = [
-  "hiking",
-  "swimming",
-  "dancing",
-  "reading",
-  "running",
-];
+// const hobbies: string[] = [
+//   "hiking",
+//   "swimming",
+//   "dancing",
+//   "reading",
+//   "running",
+// ];
 
-const person = {
-  firstName: "Lisis",
-  age: 29,
-  petName: "Baco",
-};
+// const person = {
+//   firstName: "Lisis",
+//   age: 29,
+//   petName: "Baco",
+// };
 
-const [hobbie1, hobbie2, ...restOfHobbies] = hobbies;
-console.log(hobbie1, hobbie2);
-console.log(restOfHobbies);
+// const [hobbie1, hobbie2, ...restOfHobbies] = hobbies;
+// console.log(hobbie1, hobbie2);
+// console.log(restOfHobbies);
 
-const { firstName: userName, age } = person;
-console.log(userName, age);
+// const { firstName: userName, age } = person;
+// console.log(userName, age);
 
 // creating new classes
 
-class Department {
+abstract class Department {
   // public name: string;
   // private employees: string[] = []; // by adding "private", we make this property only accessible/changeble through the established method  declared withing this class declaration.
   // private id: string;
@@ -43,13 +43,12 @@ class Department {
   static createEmployee(name: string) {
     return { name: name };
   }
-  constructor(public name: string, private id: string) {
+  constructor(public name: string, protected id: string) {
     console.log(Department.fiscalYear); // this is how you access static properties from INSIDE the class
   }
 
-  describe(this: Department) {
-    console.log("Department: " + this.name);
-  }
+  abstract describe(this: Department): void; // we have to declare this method like this, because it's functionality/return value will be defined inside the classes that are inherited by this one.
+
   addEmployee(employee: string) {
     this.employees.push(employee);
   }
@@ -60,29 +59,33 @@ class Department {
   }
 }
 
-const delivery = new Department("Delivery", "d1"); // when we use the Department class, the constructor function is called and it takes a string as a parameter.
-console.log(delivery);
+// const delivery = new Department("Delivery", "d1"); // when we use the Department class, the constructor function is called and it takes a string as a parameter.
+// console.log(delivery);
 
-delivery.addEmployee("Lisis");
-delivery.addEmployee("Cecile");
+// delivery.addEmployee("Lisis");
+// delivery.addEmployee("Cecile");
 
-delivery.describe();
-delivery.printEmployeesInfo();
+// delivery.describe();
+// delivery.printEmployeesInfo();
 
-const orders = new Department("Orders", "d2");
-orders.describe();
-console.log(orders);
+// const orders = new Department("Orders", "d2");
+// orders.describe();
+// console.log(orders);
 
 // const ordersCopy = { name: "Dummy", describe: orders.describe };
 // ordersCopy.describe();
 
-const employee1 = new Department("Employees", "d3");
-employee1.addEmployee("Lisis");
+// const employee1 = new Department("Employees", "d3");
+// employee1.addEmployee("Lisis");
 
 // inheritance: create a new class that inherits all the properties from another already existing class and new properties and methods that can be added to the new class
 
 class AccountingDepartment extends Department {
   private lastReport: string;
+
+  describe() {
+    console.log("IT department - accounting " + this.id);
+  }
 
   public get mostRecentReport() {
     if (this.lastReport) {
@@ -100,7 +103,7 @@ class AccountingDepartment extends Department {
   }
 
   constructor(id: string, private reports: string[]) {
-    super(id, "Accounting"); // super() calls the constructor of the base class, in this case Department. It has to be called before defining a new methods for this class.
+    super("id", "02"); // super() calls the constructor of the base class, in this case Department. It has to be called before defining a new methods for this class.
     this.lastReport = reports[0];
   }
 
@@ -132,6 +135,7 @@ accounting.addReport("nothing to state...");
 accounting.mostRecentReport = "New report"; // setting
 accounting.mostRecentReport = "Another New report";
 accounting.printReport();
+accounting.describe();
 // accounting.addEmployee("Lisis");
 // accounting.addEmployee("Manu");
 // accounting.printEmployeesInfo();
@@ -142,3 +146,7 @@ accounting.printReport();
 
 const newEmployee = Department.createEmployee("Jasmeen");
 console.log(newEmployee, Department.fiscalYear);
+
+/////////////////////////// ABSTRACT CLASSES ///////////////////
+// with adding the keyword "abstract" in front of any method inside our classes, we allow these methods to be overriten by other classes that is build on this main class. For this to be able, we need to turn the main Class into abstract as well, which then allows it to only be initiated by the inherited classes.
+// the "abstract" method MUST then be implemented in any other initialized class that is based on the abstract class
