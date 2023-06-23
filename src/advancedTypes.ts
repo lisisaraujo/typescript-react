@@ -103,4 +103,32 @@ function printVehicleInfo(vehicle: Vehicle) {
 }
 
 printVehicleInfo(v1);
-printVehicleInfo(v2)
+printVehicleInfo(v2);
+
+/////////////// Descriminated Unions //////////////
+
+interface Bird {
+  type: "bird";
+  flyingSpeed: number;
+}
+
+interface Horse {
+  type: "horse";
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+  let speed;
+  switch (animal.type) {
+    case "bird":
+      speed = animal.flyingSpeed;
+      break;
+    case "horse":
+      speed = animal.runningSpeed;
+  }
+  console.log(`moving at speed ${speed}`);
+}
+
+moveAnimal({ type: "bird", flyingSpeed: 10 });
