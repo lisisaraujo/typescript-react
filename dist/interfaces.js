@@ -1,20 +1,21 @@
 "use strict";
-let user1;
-user1 = {
-    name: "Lisis",
-    greet(phrase) {
-        console.log(`${phrase} ${this.name} `);
-    },
-};
-user1.greet(`Hey there, I am`);
 class Person {
     constructor(n) {
         this.age = 30;
-        this.name = n;
+        if (n) {
+            this.name = n;
+        }
     }
     greet(phrase) {
-        console.log(`${phrase} ${this.name} `);
+        if (this.name) {
+            console.log(`${phrase} ${this.name} `);
+        }
+        else {
+            console.log("Hi");
+        }
     }
 }
+let user1;
 user1 = new Person("Lisis");
 console.log(user1);
+user1.greet("Hi there - I am ");
