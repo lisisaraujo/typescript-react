@@ -105,7 +105,7 @@ function printVehicleInfo(vehicle: Vehicle) {
 printVehicleInfo(v1);
 printVehicleInfo(v2);
 
-/////////////// Descriminated Unions //////////////
+/////////////// Discriminated Unions //////////////
 
 interface Bird {
   type: "bird";
