@@ -132,3 +132,18 @@ function moveAnimal(animal: Animal) {
 }
 
 moveAnimal({ type: "bird", flyingSpeed: 10 });
+
+//////// INDEX PROPERTIES ////////////////////
+
+// we create a flexible interface so that we can re-use it for different error containers. The number of properties is irrelevant
+interface ErrorContainer {
+  // example: email: "Not a valid email" or "username: "Must start with a character""
+  [prop: string]: string;
+}
+
+// this error bag is build based on the previous interface we created
+const errorBag: ErrorContainer = {
+  email: "Not a valid email!",
+  username: "Must start with a capital character!",
+  age: "Must be a number!",
+};
