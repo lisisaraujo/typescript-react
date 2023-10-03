@@ -1,4 +1,5 @@
 "use strict";
+var _a;
 const e1 = {
     name: "Lisis",
     privileges: ["create-search", "delete data", "add data"],
@@ -18,6 +19,9 @@ function add(a, b) {
     }
     return a + b;
 }
+const result = add("Lis", " Araujo");
+result.split(" ");
+console.log(result);
 console.log(add(2, 5));
 function printEmployeeInformation(emp) {
     console.log(`Name: ${emp.name}`);
@@ -65,3 +69,23 @@ function moveAnimal(animal) {
     console.log(`moving at speed ${speed}`);
 }
 moveAnimal({ type: "bird", flyingSpeed: 10 });
+const errorBag = {
+    email: "Not a valid email!",
+    username: "Must start with a capital character!",
+    age: "Must be a number!",
+};
+const fecthedUserData = {
+    id: "u1",
+    name: "Lisis",
+    job: {
+        title: "CEO",
+        description: "My own company",
+    },
+};
+console.log((_a = fecthedUserData === null || fecthedUserData === void 0 ? void 0 : fecthedUserData.job) === null || _a === void 0 ? void 0 : _a.description);
+const userInput = undefined;
+const userInput2 = "";
+const storedData = userInput !== null && userInput !== void 0 ? userInput : "DEFAULT";
+console.log(storedData);
+const storedData2 = userInput2 !== null && userInput2 !== void 0 ? userInput2 : "DEFAULT";
+console.log(storedData2);

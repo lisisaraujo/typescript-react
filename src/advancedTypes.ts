@@ -50,12 +50,23 @@ type Universal = Combinable & Numeric;
 
 //////////////////// type Guards
 
+// Function Overloads: we declare all the possible combinations the function can take in and define what it will return before the function declaration. It serves as a function inftomation
+// function information:
+function add(a: number, b: number): number;
+function add(a: string, b: string): string;
+function add(a: number, b: string): string;
+function add(a: string, b: number): string;
+// function declaration:
 function add(a: Combinable, b: Combinable) {
   if (typeof a === "string" || typeof b === "string") {
     return a.toString() + b.toString();
   }
   return a + b;
 }
+
+const result = add("Lis", " Araujo");
+result.split(" ");
+console.log(result);
 
 console.log(add(2, 5));
 
@@ -147,3 +158,27 @@ const errorBag: ErrorContainer = {
   username: "Must start with a capital character!",
   age: "Must be a number!",
 };
+
+///// OPTIONAL CHAINING /////
+
+const fecthedUserData = {
+  id: "u1",
+  name: "Lisis",
+  job: {
+    title: "CEO",
+    description: "My own company",
+  },
+};
+
+console.log(fecthedUserData?.job?.description); // here we check first if there is a job property in fecthedUserData. If so, we log job. Then we check again if there is "description" inside the job object. If so, we log that too.
+
+///////////NULLISH COALESCING (??) ////
+// by writting a double question mark, we check if the data type is NULL OR UNDEFINED. And if so, we define a default value to be replaced. In any other case, we return the actual defined value.
+
+const userInput = undefined;
+const userInput2 = "";
+
+const storedData = userInput ?? "DEFAULT"; // is userInput null or undefined? if so, the value is "DEFAULT".
+console.log(storedData);
+const storedData2 = userInput2 ?? "DEFAULT"; // is sortedData2 null or undefined? if so, the value is "DEFAULT". In this case, even though an empty string is a falsy value, it is still not null or undefined, so the value is the empty string instead of "DEFAULT"
+console.log(storedData2);
